@@ -12,27 +12,27 @@
             <h1>🪐 Planetary Age Calculator</h1>
             <p>How old would you be in other planets?</p>
         </header>
-    </div>
 
-    <div class="input-section">
-        <label for="dob">Your Birthdate</label>
-        <input type="date" id="dob" />        
-    </div>
-    
-    <div class="planet-grid">
-        <button class="planet-btn active" data-planet="earth" onclick="selectPlanet(this)"><span class="planet-icon">🌍</span>Earth</button>
-        <button class="planet-btn" data-planet="mercury" onclick="selectPlanet(this)"><span class="planet-icon">☿</span>Mercury</button>
-        <button class="planet-btn" data-planet="venus" onclick="selectPlanet(this)"><span class="planet-icon">♀</span>Venus</button>
-        <button class="planet-icon" data-planet="mars" onclick="selectPlanet(this)"><span class="planet-icon">♂</span>Mars</button>
-        <button class="planet-btn" data-planet="jupiter" onclick="selectPlanet(this)"><span class="planet-icon">♃</span>Jupiter</button>
-        <button class="planet-btn" data-planet="saturn" onclick="selectPlanet(this)"><span class="planet-icon">♄</span>Saturn</button>
-        <button class="planet-btn" data-planet="uranus" onclick="selectPlanet(this)"><span class="planet-icon">⛢</span>Uranus</button>
-        <button class="planet-btn" data-planet="neptune" onclick="selectPlanet(this)"></button>
-    </div>
+        <div class="input-section">
+            <label for="dob">Your Birthdate</label>
+            <input type="date" id="dob" />   
+        </div>
 
+        <div class="planet-grid">
+            <button class="planet-btn active" data-planet="earth" onclick="selectPlanet(this)"><span class="planet-icon">🌍</span>Earth</button>
+            <button class="planet-btn" data-planet="mercury" onclick="selectPlanet(this)"><span class="planet-icon">☿</span>Mercury</button>
+            <button class="planet-btn" data-planet="venus" onclick="selectPlanet(this)"><span class="planet-icon">♀</span>Venus</button>
+            <button class="planet-icon" data-planet="mars" onclick="selectPlanet(this)"><span class="planet-icon">♂</span>Mars</button>
+            <button class="planet-btn" data-planet="jupiter" onclick="selectPlanet(this)"><span class="planet-icon">♃</span>Jupiter</button>
+            <button class="planet-btn" data-planet="saturn" onclick="selectPlanet(this)"><span class="planet-icon">♄</span>Saturn</button>
+            <button class="planet-btn" data-planet="uranus" onclick="selectPlanet(this)"><span class="planet-icon">⛢</span>Uranus</button>
+            <button class="planet-btn" data-planet="neptune" onclick="selectPlanet(this)"><span class="planet-icon">♆</span>Neptune</button>
+        </div>
 
-
-
+        <div id="result-area">
+            <div class="empty-state">Enter your birthdate to dive into your cosmic journey</div>
+        </div>
+    </div>  
 
 
     <script src="script.js"></script>
