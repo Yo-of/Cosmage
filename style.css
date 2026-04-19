@@ -291,7 +291,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .fun-item {
     display: flex;
-    align-item: center;
+    align-items: center;
     gap: 10px;
     font-size: 0.82rem;
     color: var(--muted);
@@ -344,6 +344,51 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     margin-bottom: 4px;
 }
 
+.action-row {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.action-btn {
+    flex: 1;
+    min-width: 120px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 0.6rem 1rem;
+    font-family: inherit;
+    font-size: 0.82rem;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.18s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.action-btn:hover {
+    border-color: var(--border2);
+    color: var(--text);
+}
+
+.action-btn.copied {
+    border-color: var(--success);
+    color: var(--success);
+}
+
+#confetti-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+}
+
 .empty-state {
     text-align: center;
     padding: 3rem 1rem;
@@ -352,8 +397,31 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 @media (max-width: 520px ) {
-    .planet-btn { padding : 0.6rem 0.3rem; font-size: 0.7rem;}
-    .planet-icon { font-size: 1.2rem; }
-    .results-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .metric-value { font-size: 1rem; }
+
+    .planet-grid { 
+        grid-template-columns: repeat(5, 1fr); 
+        gap: 5px; 
+    }
+
+    .planet-btn { 
+        padding : 0.55rem 0.2rem;
+        font-size: 0.65rem;
+    }
+
+    .planet-icon { 
+        font-size: 1.1rem; 
+    }
+
+    .results-grid { 
+        grid-template-columns: repeat(2, 1fr);
+        gap: 8px;
+    }
+
+    .metric-value {
+        font-size: 1rem;
+    }
+
+    .fun-grid {
+        grid-template-columns: 1fr;
+    }
 }
