@@ -17,5 +17,37 @@ dobInput.addEventListener("change", render);
 
 function selectPlanet(btn) {
     document.querySelectorAll(".planet-btn").forEach(b => b.classList.remove("active"));
-    btn.classList.add()
+    btn.classList.add("active");
+    selectedPlanet = btn.dataset.planet;
+    render();
+}
+
+function fmt(n) {
+    if (n >= 1e12) return (n / 1e12).toFixed(2) + " trillion";
+    if (n >= 1e9) return (n / 1e9).toFixed(2) + " billion";
+    if (n >= 1e6) return (n /1e6).toFixed(2) + " million";
+    return Math.round(n).toLocaleString();
+}
+
+function render() {
+    const area = document.getElementById("results-area");
+    const val = dobInput.value;
+
+    if (!val) {
+        area.innerHTML = '<div class="empty-state">Enter your birthdate to dive into your cosmic journey.</div>';
+        return;
+    }
+
+const msAlive = new Date() - new Date(val);
+if (msAlive <= 0) {
+    area.innerHTML = '<div class="empty-state">Birthdate must be in the past.</div>';
+    return;
+}
+
+const p = PLANETS[selectedPlanet];
+const seconds = msAlive / 1000;
+const minutes = seconds / 60;
+
+
+
 }
