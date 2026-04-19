@@ -7,19 +7,48 @@ const PLANETS = {
   saturn:  { name: "Saturn",  yearDays: 10759.22, dayHours: 10.66,  symbol: "♄",  fact: "Saturn's rings span 282,000 km but are only ~10 meters thick. It's so low-density it would float on water. " },
   uranus:  { name: "Uranus",  yearDays: 30688.5,  dayHours: 17.23,  symbol: "⛢",  fact: "Uranus is tilted 98° on it's side. This cause its poles to experience 42 years of continuous sunlight then 42 years of total darkness. " },
   neptune: { name: "Neptune", yearDays: 60182,    dayHours: 16.11,  symbol: "♆",  fact: "Since its discovery in 1846, Neptune has completed just one full orbit. Its winds reach 2,100 km/h. Than make them the fastest winds in the solar system. ", },
+  pluto: { name: "Pluto", yearDays: 90560, dayHours: 153.3, symbol: "⯓", fact: "Pluto was reclassified as a dwarf planet in 2006 (what a downgrade be grateful you aren't reclassified as a sandwich). It has hearth-shaped nitrogen ice plain called Tombaugh Regio. One Pluto year is 248 Earth years, so since it's discovery in 1930, it has completed just 1/3 of its orbit around the Sun.", },
+  sun: { name: "Sun", yearDays:365.25, dayHours: 609.12, symbol: "☀", fact: "The Sun rotates faster at its equator (around 25 days) than at its poles (around 35 days). A days at the Sun's equator is about 609 hours long. The Sun is so huge that about 1.3 million Earths could fit inside it. The Sun alone contait 99.86% of the total mass of the solar system (so take it easy you aren't that fat).", },
 };
 
 let selectedPlanet = "earth";
+let tickInterval = null;
+let confettiFrame = null;
+
+const params = new URLSearchParams(window.location.search);
+if (params.get("dob")) document.getElementById("dob").value = params.get("dob");
+if (params.get("planet") && PLANETS[params.get("planet")]) {
+  selectedPlanet = params.get("planet");
+  document.querySelector(".planet-btn").forEach(b => {
+    b.classList.toggle("active", b.dataset.planet === selectedPlanet);
+  });
+}
 
 const dobInput = document.getElementById("dob");
 dobInput.max = new Date().toISOString().split("T")[0];
-dobInput.addEventListener("change", render);
+dobInput.addEventListener("change", () => { render(); updateURL(); });
+
+const themeBtn = document.getElementById("theme-toggle");
+themeBtn.addEventListener("click", () => {
+  document.body.classList.toggle("light");
+  themeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
+});
 
 function selectPlanet(btn) {
   document.querySelectorAll(".planet-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   selectedPlanet = btn.dataset.planet;
   render();
+  updateURL();
+}
+
+function updateURL() {
+  const val = dobIput.value;
+  if (!val) return;
+  const url = new URL(window.location.href);
+  url.searchParams.set("dob", value);
+  url.searchParams.set("planet", selectedPlanet);
+  window.history.replaceState( {}, "", url.toString() );
 }
 
 function fmt(n) {
@@ -27,6 +56,13 @@ function fmt(n) {
   if (n >= 1e9)  return (n / 1e9).toFixed(2) + " billion";
   if (n >= 1e6)  return (n / 1e6).toFixed(2) + " million";
   return Math.round(n).toLocaleString();
+}
+
+function fmtDaysUntil(earthDays) {
+  if (earthDays < 1) return "Less than a day";
+  if (earthDays < 30) return `${Math.round(earthDays)} Earth days`;
+  if (earthDays < 365) return `~${Math.round(earthDays / 30.44)} months`;
+  return `~${(earthDays / 365.25).toFixed(1)} Earth years`; 
 }
 
 function render() {
