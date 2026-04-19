@@ -58,14 +58,14 @@ header p {
 }
 
 .input-section label {
-    font-seize: 0.85rem;
+    font-size: 0.85rem;
     color: var(--muted);
     white-space: nowrap;
 }
 
 .input-section input[type="date"] {
     flex: 1;
-    min-widht: 160px;
+    min-width: 160px;
     background: var(--surface2);
     border: 1px solid var(--border2);
     border-radius: 10px;
@@ -97,5 +97,93 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 12px;
-    padding: 0.75rem
+    padding: 0.75rem 0.5rem;
+    cursor: pointer;
+    text-align: center;
+    transition: all 0.18s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    color: var(--muted);
+    font-family: inherit;
+    font-size: 0.78rem;
+}
+
+.planet-btn:hover {
+    border-color: var(--border2);
+    color: var(--text);
+}
+
+.planet-btn.active {
+    border-color: var(--accent);
+    background: var(--accent-glow);
+    color: var(--text);
+}
+
+.planet-icon {
+    font-size: 1.5rem;
+    line-height: 1;
+}
+
+.results-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 10px;
+    margin-bottom: 1.25rem;
+}
+
+.metric-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.1rem;
+}
+
+.metric-label {
+    font-size: 0.72rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 6px;
+}
+
+.metric-value {
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--text);
+    line-height: 1.2;
+    word-break: break-word;
+}
+
+.planet-fact {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    font-size: 0.88rem;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.planet-fact strong {
+    color: var(--text);
+    font-weight: 500;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 1rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+@media (max-width: 520px ) {
+    .planet-btn { padding : 0.6rem 0.3rem; font-size: 0.7rem;}
+    .planet-icon { font-size: 1.2rem; }
+    .results-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .metric-value { font-size: 1rem; }
 }
