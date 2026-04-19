@@ -11,11 +11,12 @@
         <header>
             <h1>🪐 Planetary Age Calculator</h1>
             <p>How old would you be in other planets?</p>
+            <button class="theme-toggle" id="theme-toggle" title="Toggle Theme">🌙</button>
         </header>
 
         <div class="input-section">
             <label for="dob">Your Birthdate</label>
-            <input type="date" id="dob" />   
+            <input type="date" id="dob" />
         </div>
 
         <div class="planet-grid">
@@ -27,6 +28,8 @@
             <button class="planet-btn" data-planet="saturn" onclick="selectPlanet(this)"><span class="planet-icon">♄</span>Saturn</button>
             <button class="planet-btn" data-planet="uranus" onclick="selectPlanet(this)"><span class="planet-icon">⛢</span>Uranus</button>
             <button class="planet-btn" data-planet="neptune" onclick="selectPlanet(this)"><span class="planet-icon">♆</span>Neptune</button>
+            <button class="planet-btn" data-planet="pluto" onclick="selectPlanet(this)"><span class="planet-icon">⯓</span>Pluto</button>
+            <button class="planet-btn" data-planet="sun" onclick="selectPlanet(this)"><span class="planet-icon">☀</span>Sun</button>
         </div>
 
         <div id="results-area">

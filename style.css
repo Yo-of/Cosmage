@@ -14,7 +14,22 @@
     --muted: #8a8a9a;
     --accent: #7b6cff;
     --accent-glow: rgba(123, 108, 255, 0.18);
+    --success: #22c55e;
+    --success-glow: rgba(34, 197, 94, 0.15);
 }
+
+body.light {
+    --bg: #f3f4f8;
+    --surface: #ffffff;
+    --surface2: #f0eff6;
+    --border: rgba(0, 0, 0, 0.08);
+    --border2: rgba(0, 0, 0, 0.14);
+    --text: #111118;
+    --muted: #666677;
+    --accent: #5b4ef5;
+    --accent-glow: rgba(91, 78,245, 0.12);
+}
+
 
 body {
     font-family: 'Space Grotesk', sans-serif;
@@ -22,6 +37,7 @@ body {
     color: var(--text);
     min-height: 100vh;
     padding: 2rem 1rem 4rem;
+    transition: background 0.3s, color 0.3s;
 }
 
 .wrapper { 
@@ -32,6 +48,7 @@ body {
 header {
     margin-bottom: 2rem;
     text-align: center;
+    position: relative;
 }
 
 header h1 {
@@ -44,6 +61,25 @@ header h1 {
 header p {
     font-size: 0.95rem;
     color: var(--muted);
+}
+
+.theme-toggle {
+    position: absolute;
+    top: 0; right: 0;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    width: 36px; height: 36px;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s, border-color 0.2;
+}
+
+.theme-toggle:hover {
+    border-color: var(--border2);
 }
 
 .input-section {
@@ -89,7 +125,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .planet-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(5, 1fr);
     gap: 8px;
     margin-bottom: 1.5rem;
 }
@@ -108,7 +144,9 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     gap: 5px;
     color: var(--muted);
     font-family: inherit;
-    font-size: 0.78rem;
+    font-size: 0.72rem;
+    position: relative;
+    overflow: hidden;
 }
 
 .planet-btn:hover {
@@ -123,15 +161,34 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .planet-icon {
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     line-height: 1;
+    display: inline-block;
+}
+
+.planet-btn.active .planet-icon {
+    animation: spin 8s linear infinite;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.bday-badge {
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 8px; height: 8px;
+    background: var(--success);
+    border-radius: 50%;
 }
 
 .results-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
     gap: 10px;
-    margin-bottom: 1.25rem;
+    margin-bottom: 1rem;
 }
 
 .metric-card {
@@ -139,6 +196,11 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border: 1px solid var(--border);
     border-radius: 12px;
     padding: 1rem 1.1rem;
+    transition: border-color 0.2s;
+}
+
+.metric-card.live {
+    border-color: var(--accent);
 }
 
 .metric-label {
@@ -150,11 +212,117 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .metric-value {
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     font-weight: 600;
     color: var(--text);
     line-height: 1.2;
     word-break: break-word;
+}
+
+.progress-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.progress-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 10px;
+}
+
+.progress-title {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+}
+
+.progress-pct {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text);
+}
+
+.progress-bar-bg {
+    background: var(--surface);
+    border-radius: 999px;
+    height: 8px;
+    overflow: hidden;
+    margin-bottom: 8px;
+}
+
+.progress-bar-fill {
+    height: 100%;
+    background: var(--accent);
+    border-radius: 999px;
+    transition: width 0.6s ease;
+}
+
+.progress-sub {
+    font-size: 0.78rem;
+    color: var(--muted);
+}
+
+.fun-section {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+}
+
+.fun-title {
+    font-size: 0.8rem;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    margin-bottom: 10px;
+}
+
+.fun-grid {
+    display: grid;
+    grid-template-columns: repeat(autofit, minmax(180px, 1fr));
+    gap: 8px;
+}
+
+.fun-item {
+    display: flex;
+    align-item: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: var(--muted);
+    line-height: 1.4;
+}
+
+.fun-item span:first-child {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+}
+
+.fun-item strong {
+    color: var(--text);
+    font-weight: 500;
+}
+
+.bday-banner {
+    background-color: var(--success-glow);
+    border: 1px solid var(--success);
+    border-radius: 12px;
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: var(--text);
+    text-align: center;
+    animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+    0%, 100% { opacity: 1; } 
+    50% { opacity: 0.75; }
 }
 
 .planet-fact {
@@ -163,6 +331,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
     border-left: 3px solid var(--accent);
     border-radius: 12px;
     padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
     font-size: 0.88rem;
     color: var(--muted);
     line-height: 1.7;
