@@ -36,11 +36,12 @@ themeBtn.addEventListener("click", () => {
   themeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
 });
  
-function selectPlanet(btn) {
+window.selectPlanet = function(btn) {
   document.querySelectorAll(".planet-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   selectedPlanet = btn.dataset.planet;
-  render(); updateURL();
+  render();
+  updateURL();
 }
  
 function updateURL() {
