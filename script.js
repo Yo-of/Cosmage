@@ -11,11 +11,11 @@ const PLANETS = {
   sun: { name: "Sun", yearDays:365.25, dayHours: 609.12, symbol: "☀", fact: "The Sun rotates faster at its equator (around 25 days) than at its poles (around 35 days). A days at the Sun's equator is about 609 hours long. The Sun is so huge that about 1.3 million Earths could fit inside it. The Sun alone contait 99.86% of the total mass of the solar system (so take it easy you aren't that fat).", },
 };
 
-
 let selectedPlanet = "earth";
 let tickInterval = null;
 let confettiFrame = null;
-
+ 
+// URL params
 const params = new URLSearchParams(window.location.search);
 if (params.get("dob")) document.getElementById("dob").value = params.get("dob");
 if (params.get("planet") && PLANETS[params.get("planet")]) {
@@ -24,25 +24,25 @@ if (params.get("planet") && PLANETS[params.get("planet")]) {
     b.classList.toggle("active", b.dataset.planet === selectedPlanet);
   });
 }
-
+ 
 const dobInput = document.getElementById("dob");
 dobInput.max = new Date().toISOString().split("T")[0];
 dobInput.addEventListener("change", () => { render(); updateURL(); });
-
+ 
+// theme
 const themeBtn = document.getElementById("theme-toggle");
 themeBtn.addEventListener("click", () => {
   document.body.classList.toggle("light");
   themeBtn.textContent = document.body.classList.contains("light") ? "🌙" : "☀️";
 });
-
+ 
 function selectPlanet(btn) {
   document.querySelectorAll(".planet-btn").forEach(b => b.classList.remove("active"));
   btn.classList.add("active");
   selectedPlanet = btn.dataset.planet;
-  render();
-  updateURL();
+  render(); updateURL();
 }
-
+ 
 function updateURL() {
   const val = dobInput.value;
   if (!val) return;
@@ -51,20 +51,19 @@ function updateURL() {
   url.searchParams.set("planet", selectedPlanet);
   window.history.replaceState({}, "", url.toString());
 }
-
+ 
 function fmt(n) {
   if (n >= 1e12) return (n / 1e12).toFixed(2) + " trillion";
   return Math.round(n).toLocaleString();
 }
-
-
+ 
 function fmtDaysUntil(earthDays) {
   if (earthDays < 1)   return "less than a day";
   if (earthDays < 30)  return `${Math.round(earthDays)} Earth days`;
   if (earthDays < 365) return `~${Math.round(earthDays / 30.44)} months`;
   return `~${(earthDays / 365.25).toFixed(1)} Earth years`;
 }
-
+ 
 function isBirthdayToday(dob, key) {
   const p = PLANETS[key];
   const earthDays = (Date.now() - dob.getTime()) / 86400000;
@@ -72,14 +71,14 @@ function isBirthdayToday(dob, key) {
   const dayFrac = 1 / p.yearDays;
   return fraction < dayFrac || fraction > (1 - dayFrac);
 }
-
+ 
 function daysUntilNextBirthday(dob, key) {
   const p = PLANETS[key];
   const earthDays = (Date.now() - dob.getTime()) / 86400000;
   const planetYears = earthDays / p.yearDays;
   return (Math.ceil(planetYears) * p.yearDays) - earthDays;
 }
-
+ 
 function updateBirthdayBadges(dob) {
   document.querySelectorAll(".planet-btn").forEach(btn => {
     const ex = btn.querySelector(".bday-badge");
@@ -91,7 +90,7 @@ function updateBirthdayBadges(dob) {
     }
   });
 }
-
+ 
 function launchConfetti() {
   const canvas = document.getElementById("confetti-canvas");
   const ctx = canvas.getContext("2d");
@@ -124,7 +123,7 @@ function launchConfetti() {
   }
   draw();
 }
-
+ 
 window.copyResults = function() {
   const val = dobInput.value;
   if (!val) return;
@@ -148,7 +147,7 @@ window.copyResults = function() {
     setTimeout(() => { btn.textContent = "📋 Copy results"; btn.classList.remove("copied"); }, 2000);
   });
 };
-
+ 
 window.shareURL = function() {
   navigator.clipboard.writeText(window.location.href).then(() => {
     const btn = document.getElementById("share-btn");
@@ -156,50 +155,48 @@ window.shareURL = function() {
     setTimeout(() => { btn.textContent = "🔗 Share link"; btn.classList.remove("copied"); }, 2000);
   });
 };
-
+ 
 function render() {
   const val = dobInput.value;
   const area = document.getElementById("results-area");
   if (tickInterval) { clearInterval(tickInterval); tickInterval = null; }
-
+ 
   if (!val) {
     area.innerHTML = '<div class="empty-state">Enter your birthdate to dive into your cosmic journey.</div>';
     return;
   }
-
+ 
   const dob = new Date(val);
   if (Date.now() - dob.getTime() <= 0) {
     area.innerHTML = '<div class="empty-state">Birthdate must be in the past.</div>';
     return;
   }
-
+ 
   updateBirthdayBadges(dob);
   const isBday = isBirthdayToday(dob, selectedPlanet);
   if (isBday) launchConfetti();
-
+ 
   function buildHTML() {
     const p = PLANETS[selectedPlanet];
-    const ms           = Date.now() - dob.getTime();
-    const seconds      = ms / 1000;
-    const minutes      = seconds / 60;
-    const hours        = minutes / 60;
-    const earthDays    = hours / 24;
-    const planetDays   = (hours * 24) / p.dayHours;
-    const planetWeeks  = planetDays / 7;
-    const planetYears  = earthDays / p.yearDays;
+    const ms = Date.now() - dob.getTime();
+    const seconds = ms / 1000;
+    const minutes = seconds / 60;
+    const hours = minutes / 60;
+    const earthDays = hours / 24;
+    const planetDays = (hours * 24) / p.dayHours;
+    const planetWeeks = planetDays / 7;
+    const planetYears = earthDays / p.yearDays;
     const planetMonths = planetYears * 12;
     const e = selectedPlanet === "earth";
-
-    // NEW
-    const pct      = ((planetYears % 1) * 100).toFixed(1);
+    const pct = ((planetYears % 1) * 100).toFixed(1);
     const daysLeft = daysUntilNextBirthday(dob, selectedPlanet);
-    const fullMoons   = earthDays / 29.53;
+    const fullMoons  = earthDays / 29.53;
     const kmTravelled = earthDays * 2573424;
-    const heartbeats  = seconds * 1.2;
-
+    const heartbeats = seconds * 1.2;
+ 
     return `
       ${isBday ? `<div class="bday-banner">🎉 Happy ${p.name} Birthday! You're completing a full orbit today!</div>` : ""}
-
+ 
       <div class="results-grid">
         <div class="metric-card live">
           <div class="metric-label">Seconds ⚡</div>
@@ -230,7 +227,7 @@ function render() {
           <div class="metric-value">${parseFloat(planetYears.toFixed(2)).toLocaleString()}</div>
         </div>
       </div>
-
+ 
       <div class="progress-section">
         <div class="progress-header">
           <span class="progress-title">Progress through current ${p.name} year</span>
@@ -241,7 +238,7 @@ function render() {
         </div>
         <div class="progress-sub">Next ${p.name} birthday in <strong style="color:var(--text)">${fmtDaysUntil(daysLeft)}</strong></div>
       </div>
-
+ 
       <div class="fun-section">
         <div class="fun-title">In your lifetime on Earth…</div>
         <div class="fun-grid">
@@ -251,25 +248,26 @@ function render() {
           <div class="fun-item"><span>🌅</span><span>Witnessed <strong>${fmt(earthDays)}</strong> Earth sunrises</span></div>
         </div>
       </div>
-
+ 
       <div class="planet-fact">
         <strong>${p.symbol} ${p.name}</strong>${p.fact}
       </div>
-
+ 
       <div class="action-row">
         <button class="action-btn" id="copy-btn" onclick="copyResults()">📋 Copy results</button>
         <button class="action-btn" id="share-btn" onclick="shareURL()">🔗 Share link</button>
       </div>
     `;
   }
-
+ 
   area.innerHTML = buildHTML();
-
+ 
+  // live seconds ticker
   tickInterval = setInterval(() => {
     const el = document.getElementById("live-seconds");
     if (!el) { clearInterval(tickInterval); return; }
     el.textContent = fmt((Date.now() - dob.getTime()) / 1000);
   }, 1000);
 }
-
+ 
 if (dobInput.value) render();
