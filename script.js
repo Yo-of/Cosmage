@@ -190,7 +190,8 @@ function render() {
     const planetYears = earthDays / p.yearDays;
     const planetMonths = planetYears * 12;
     const e = selectedPlanet === "earth";
-    const pct = ((planetYears % 1) * 100).toFixed(1);
+    const completedYears = Math.floor(planetYears);
+    const pct = (((planetYears - completedYears)) * 100).toFixed(1);
     const daysLeft = daysUntilNextBirthday(dob, selectedPlanet);
     const fullMoons  = earthDays / 29.53;
     const kmTravelled = earthDays * 2573424;
