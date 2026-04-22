@@ -67,9 +67,9 @@ function fmtDaysUntil(earthDays) {
 function isBirthdayToday(dob, key) {
   const p = PLANETS[key];
   const earthDays = (Date.now() - dob.getTime()) / 86400000;
-  const fraction = (earthDays / p.yearDays) % 1;
-  const dayFrac = 1 / p.yearDays;
-  return fraction < dayFrac || fraction > (1 - dayFrac);
+  const planetYears = earthDays / p.yearDays;
+  const prevCheck = ((earthDays - 1) / p.yearDays);
+  return Math.floor(planetYears) > Math.floor(prevCheck);
 }
  
 function daysUntilNextBirthday(dob, key) {
