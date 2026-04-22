@@ -248,7 +248,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 }
 
 .progress-bar-bg {
-    background: var(--surface);
+    background: var(--surface2);
     border-radius: 999px;
     height: 8px;
     overflow: hidden;
@@ -285,7 +285,7 @@ input[type="date"]::-webkit-calendar-picker-indicator {
 
 .fun-grid {
     display: grid;
-    grid-template-columns: repeat(autofit, minmax(180px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
     gap: 8px;
 }
 
