@@ -1,5 +1,5 @@
 const PLANETS = {
-  earth:   { name: "Earth",   yearDays: 365.25,   dayHours: 24,     symbol: "🌍", fact: "Earth completes one orbit around the Sun every 365.25 days. Our entiry calendar is built around this very single cosmic cycle. " },
+  earth:   { name: "Earth",   yearDays: 365.25,   dayHours: 24,     symbol: "🌍", fact: "The Earth completes one orbit around the Sun every 365.25 days. Our entiry calendar is built around this very single cosmic cycle. " },
   mercury: { name: "Mercury", yearDays: 87.97,    dayHours: 1407.6, symbol: "☿",  fact: "A Mercury day (from sunrise to sunset) lasts around 176 Earth days which is longer than its year! Temperatures there swings between -180°C and 430°C. " },
   venus:   { name: "Venus",   yearDays: 224.7,    dayHours: 5832,   symbol: "♀",  fact: "Venus rotates backwards (we can also say retrograde), so the Sun rise from the west. A Venus day is longer than it's entire year. " },
   mars:    { name: "Mars",    yearDays: 686.97,   dayHours: 24.62,  symbol: "♂",  fact: "A Martian day (also called a Sol) is just 37 minutes longer than an Earth's one. Mars host the tallest volcano in the solar system: Olympus Mons. " },
@@ -11,6 +11,7 @@ const PLANETS = {
   sun: { name: "Sun", yearDays:365.25, dayHours: 609.12, symbol: "☀", fact: "The Sun rotates faster at its equator (around 25 days) than at its poles (around 35 days). A days at the Sun's equator is about 609 hours long. The Sun is so huge that about 1.3 million Earths could fit inside it. The Sun alone contait 99.86% of the total mass of the solar system (so take it easy you aren't that fat).", },
 };
 
+
 let selectedPlanet = "earth";
 let tickInterval = null;
 let confettiFrame = null;
@@ -19,7 +20,7 @@ const params = new URLSearchParams(window.location.search);
 if (params.get("dob")) document.getElementById("dob").value = params.get("dob");
 if (params.get("planet") && PLANETS[params.get("planet")]) {
   selectedPlanet = params.get("planet");
-  document.querySelector(".planet-btn").forEach(b => {
+  document.querySelectorAll(".planet-btn").forEach(b => {
     b.classList.toggle("active", b.dataset.planet === selectedPlanet);
   });
 }
@@ -53,10 +54,9 @@ function updateURL() {
 
 function fmt(n) {
   if (n >= 1e12) return (n / 1e12).toFixed(2) + " trillion";
-  if (n >= 1e9)  return (n / 1e9).toFixed(2) + " billion";
-  if (n >= 1e6)  return (n / 1e6).toFixed(2) + " million";
   return Math.round(n).toLocaleString();
 }
+
 
 function fmtDaysUntil(earthDays) {
   if (earthDays < 1)   return "less than a day";
@@ -163,7 +163,7 @@ function render() {
   if (tickInterval) { clearInterval(tickInterval); tickInterval = null; }
 
   if (!val) {
-    area.innerHTML = '<div class="empty-state">Enter your birthdate to begin your cosmic journey ✦</div>';
+    area.innerHTML = '<div class="empty-state">Enter your birthdate to dive into your cosmic journey.</div>';
     return;
   }
 
@@ -201,7 +201,7 @@ function render() {
       ${isBday ? `<div class="bday-banner">🎉 Happy ${p.name} Birthday! You're completing a full orbit today!</div>` : ""}
 
       <div class="results-grid">
-        <div class="metric-card live"> 
+        <div class="metric-card live">
           <div class="metric-label">Seconds ⚡</div>
           <div class="metric-value" id="live-seconds">${fmt(seconds)}</div>
         </div>
@@ -273,4 +273,3 @@ function render() {
 }
 
 if (dobInput.value) render();
-
