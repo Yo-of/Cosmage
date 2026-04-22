@@ -68,16 +68,17 @@ function fmtDaysUntil(earthDays) {
 function isBirthdayToday(dob, key) {
   const p = PLANETS[key];
   const earthDays = (Date.now() - dob.getTime()) / 86400000;
-  const planetYears = earthDays / p.yearDays;
-  const prevCheck = ((earthDays - 1) / p.yearDays);
-  return Math.floor(planetYears) > Math.floor(prevCheck);
+  const todayYears = Math.floor(earthDays / p.yearDays);
+  const yesterdayYears = Math.floor((earthDays - 1) / p.yearDays);
+  return todayYears > yesterdayYears;
 }
  
 function daysUntilNextBirthday(dob, key) {
   const p = PLANETS[key];
   const earthDays = (Date.now() - dob.getTime()) / 86400000;
   const planetYears = earthDays / p.yearDays;
-  return (Math.ceil(planetYears) * p.yearDays) - earthDays;
+  const nextWhole = Math.floor(planetYears) + 1;
+  return (nextWhole * p.yearDays) - earthDays;
 }
  
 function updateBirthdayBadges(dob) {
