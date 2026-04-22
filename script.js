@@ -7,7 +7,7 @@ const PLANETS = {
   saturn:  { name: "Saturn",  yearDays: 10759.22, dayHours: 10.66,  symbol: "♄",  fact: "Saturn's rings span 282,000 km but are only ~10 meters thick. It's so low-density it would float on water. " },
   uranus:  { name: "Uranus",  yearDays: 30688.5,  dayHours: 17.23,  symbol: "⛢",  fact: "Uranus is tilted 98° on it's side. This cause its poles to experience 42 years of continuous sunlight then 42 years of total darkness. " },
   neptune: { name: "Neptune", yearDays: 60182,    dayHours: 16.11,  symbol: "♆",  fact: "Since its discovery in 1846, Neptune has completed just one full orbit. Its winds reach 2,100 km/h. Than make them the fastest winds in the solar system. ", },
-  pluto: { name: "Pluto", yearDays: 90560, dayHours: 153.3, symbol: "⯓", fact: "Pluto was reclassified as a dwarf planet in 2006 (what a downgrade be grateful you aren't reclassified as a sandwich). It has hearth-shaped nitrogen ice plain called Tombaugh Regio. One Pluto year is 248 Earth years, so since it's discovery in 1930, it has completed just 1/3 of its orbit around the Sun.", },
+  pluto: { name: "Pluto", yearDays: 90560, dayHours: 153.3, symbol: "⯓", fact: "Pluto was reclassified as a dwarf planet in 2006 (what a downgrade... be grateful you aren't short to the point where you arereclassified as a sandwich). It has hearth-shaped nitrogen ice plain called Tombaugh Regio. One Pluto year is 248 Earth years, so since it's discovery in 1930, it has completed just 1/3 of its orbit around the Sun.", },
   sun: { name: "Sun", yearDays:365.25, dayHours: 609.12, symbol: "☀", fact: "The Sun rotates faster at its equator (around 25 days) than at its poles (around 35 days). A days at the Sun's equator is about 609 hours long. The Sun is so huge that about 1.3 million Earths could fit inside it. The Sun alone contait 99.86% of the total mass of the solar system (so take it easy you aren't that fat).", },
 };
 
@@ -54,7 +54,7 @@ function updateURL() {
 }
  
 function fmt(n) {
-  if (n >= 1e12) return (n / 1e12).toFixed(2) + " trillion";
+  if (n >= 1e12) return (n / 1e12).toFixed(2) + " trillion?! Why are you out of your grave grandma Eliz? Go back to your coffin you're grounded!";
   return Math.round(n).toLocaleString();
 }
  
