@@ -82,11 +82,11 @@ When you enter a date and pick a planet, the URL updates automatically
 Just HTML, CSS, and vanilla JavaScript. No frameworks, no libraries, no dependencies.
 Built this entirely from scratch.
 
----
-
 ## AI Usage
 
 I won't lie I used a little bit of AI mainly for getting the information and fun-facts. I also used it to format this README since I still didn't learned MARKDOWN (I know... I'll have to learn at some point but not today)
+
+---
 
 ## License
 
