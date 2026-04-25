@@ -5,7 +5,7 @@ spent way too long making it look good. here we are.
 
 jk I built it because I have exams next week and I still need to learn 36 lessons and 3 books among others :) hc team plz don't ban me I swear I'll get a good grade (somehow)
 
-built for **Hack Club Horizons** https://horizons.hackclub.com
+built for **Hack Club Horizons :** https://horizons.hackclub.com
 
 Link: **https://cosmage.netlify.app**
 
@@ -22,7 +22,7 @@ also:
 - there's a progress bar showing how far you are into your current planetary year
 - it tells you when your next birthday is on each planet
 - fun comparisons like how many full moons you've lived through or how many km you've traveled around the Sun
-- if it's your birthday on a planet, confetti drops. you're welcome
+- if it's your birthday on a planet, confetti drops (you're welcome)
 - green dot on planet buttons where it's currently your birthday
 - dark/light mode toggle
 - share button that puts your birthdate + planet in the URL so your friends can see your results
@@ -37,7 +37,7 @@ planets supported: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
 
 ## sharing
 
-when you pick a planet and enter your date, the URL updates automatically, send it to someone and they'll load your exact results. good for reminding your friends that you're the oldest, the best and that they should repect you because you can legally adopt them at 2am.
+when you pick a planet and enter your date, the URL updates automatically, send it to someone and they'll load your exact results. good for reminding your friends at 2am that you're the oldest, the best and that they should repect you because you can legally adopt them.
 
 ## stack
 
